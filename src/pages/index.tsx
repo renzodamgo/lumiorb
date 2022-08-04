@@ -12,7 +12,26 @@ const Home: NextPage = () => {
 
 			<main>
 				<section>
-					<h1 className="text-4xl">LumiOrb</h1>
+					<div className="flex justify-center items-center flex-col h-screen gap-8">
+						<div className="absolute bottom-0 w-full bg-blue flex justify-center">
+							<div className="flex flex-row py-2">
+								<p>Developed by &nbsp;</p>
+								<a
+									className=" font-semibold"
+									href="https://github.com/renzodamgo">
+									@Renzodamgo
+								</a>
+							</div>
+						</div>
+						<h1 className="text-4xl font-semibold">LumiOrb</h1>
+						<p className="max-w-[900px] text-center mx-6">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
+							commodi perferendis enim repellendus eligendi excepturi incidunt
+							odio. Quisquam laboriosam nesciunt placeat, magni optio autem ex
+							quo! Aperiam dicta id totam et adipisci. Error, aliquid quidem
+							modi quisquam corrupti dolorem a.
+						</p>
+					</div>
 				</section>
 			</main>
 		</div>
