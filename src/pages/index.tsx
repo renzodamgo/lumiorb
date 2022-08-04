@@ -11,7 +11,9 @@ const Home: NextPage = () => {
 			</Head>
 
 			<main>
-				<h1 className="text-3xl">LumiOrb</h1>
+				<section>
+					<h1 className="text-4xl">LumiOrb</h1>
+				</section>
 			</main>
 		</div>
 	);
