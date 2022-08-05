@@ -3,33 +3,18 @@ import Head from 'next/head';
 import { ChangeEvent, useState } from 'react';
 
 const Home: NextPage = () => {
-	const [color, setColor] = useState('#FFFFFF');
 	const [circleOptions, SetCircleOptions] = useState({
-		width: 100,
-		height: 100,
+		borderWidth: 155,
+		size: 460,
+		color: '#FFFFFF',
 	});
 
-	const [innerCircleOptions, SetInnerCircleOptions] = useState({
-		width: 50,
-		height: 50,
-	});
-
-	const handleColor = (e: ChangeEvent<HTMLInputElement>) => {
-		setColor(e.target.value);
-	};
-
-	const handleSize = (e: ChangeEvent<HTMLInputElement>) => {
-		SetCircleOptions({
-			width: Number(e.target.value) || 0,
-			height: Number(e.target.value) || 0,
-		});
-	};
-
-	const innerHandleSize = (e: ChangeEvent<HTMLInputElement>) => {
-		SetInnerCircleOptions({
-			width: Number(e.target.value) || 0,
-			height: Number(e.target.value) || 0,
-		});
+	const handleCircleOptions = (e: ChangeEvent<HTMLInputElement>) => {
+		SetCircleOptions((options) => ({
+			...options,
+			[e.target.name]: Number(e.target.value) || e.target.value,
+		}));
+		console.log(e.target.name, circleOptions);
 	};
 
 	return (
@@ -69,18 +54,14 @@ const Home: NextPage = () => {
 						<div
 							className={`absolute rounded-full bg-white z-0`}
 							style={{
-								backgroundColor: color,
-								width: circleOptions.width,
-								height: circleOptions.height,
-							}}></div>
-						<div
-							className={`absolute rounded-full bg-black z-10`}
-							style={{
 								backgroundColor: 'black',
-								width: innerCircleOptions.width,
-								height: innerCircleOptions.height,
+								width: circleOptions.size,
+								height: circleOptions.size,
+								outline: 'solid',
+								outlineWidth: circleOptions.borderWidth,
+								outlineColor: circleOptions.color,
 							}}></div>
-						<div className=" absolute left-0 top-0  p-5">
+						<div className=" absolute left-0 top-0  p-5 flex flex-col gap-5">
 							<div className="flex gap-3 text-2xl font-semibold">
 								<h1>LumiOrb</h1>
 							</div>
@@ -88,31 +69,34 @@ const Home: NextPage = () => {
 								Color:
 								<input
 									type="color"
-									onChange={handleColor}
-									value={color}
+									onChange={handleCircleOptions}
+									value={circleOptions.color}
 									className="z-10"
+									name="color"
 								/>
 							</div>
 							<div className="flex gap-3">
 								Size:
 								<input
 									type="range"
-									onChange={handleSize}
+									onChange={handleCircleOptions}
 									className="z-10"
-									value={circleOptions.height}
-									min="0"
+									value={circleOptions.size}
+									min="1"
 									max="1300"
+									name="size"
 								/>
 							</div>
 							<div className="flex gap-3">
-								Size:
+								BorderSize:
 								<input
 									type="range"
-									onChange={innerHandleSize}
+									onChange={handleCircleOptions}
 									className="z-10"
-									value={innerCircleOptions.height}
-									min="0"
+									value={circleOptions.borderWidth}
+									min="1"
 									max="1300"
+									name="borderWidth"
 								/>
 							</div>
 						</div>
