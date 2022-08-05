@@ -1,7 +1,37 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { ChangeEvent, useState } from 'react';
 
 const Home: NextPage = () => {
+	const [color, setColor] = useState('#FFFFFF');
+	const [circleOptions, SetCircleOptions] = useState({
+		width: 100,
+		height: 100,
+	});
+
+	const [innerCircleOptions, SetInnerCircleOptions] = useState({
+		width: 50,
+		height: 50,
+	});
+
+	const handleColor = (e: ChangeEvent<HTMLInputElement>) => {
+		setColor(e.target.value);
+	};
+
+	const handleSize = (e: ChangeEvent<HTMLInputElement>) => {
+		SetCircleOptions({
+			width: Number(e.target.value) || 0,
+			height: Number(e.target.value) || 0,
+		});
+	};
+
+	const innerHandleSize = (e: ChangeEvent<HTMLInputElement>) => {
+		SetInnerCircleOptions({
+			width: Number(e.target.value) || 0,
+			height: Number(e.target.value) || 0,
+		});
+	};
+
 	return (
 		<div>
 			<Head>
@@ -12,25 +42,80 @@ const Home: NextPage = () => {
 
 			<main>
 				<section>
-					<div className="flex justify-center items-center flex-col h-screen gap-8">
-						<div className="absolute bottom-0 w-full bg-blue flex justify-center">
+					<div className="flex justify-center items-center flex-col h-screen gap-8 relative">
+						<div className="absolute bottom-0 w-full bg-blue flex justify-center z-10">
 							<div className="flex flex-row py-2">
 								<p>Developed by &nbsp;</p>
 								<a
 									className=" font-semibold"
-									href="https://github.com/renzodamgo">
+									href="https://github.com/renzodamgo"
+									target="_blank"
+									rel="noreferrer">
 									@Renzodamgo
 								</a>
 							</div>
 						</div>
-						<h1 className="text-4xl font-semibold">LumiOrb</h1>
+						{/* <h1 className="text-4xl font-semibold">LumiOrb</h1>
 						<p className="max-w-[900px] text-center mx-6">
 							Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
 							commodi perferendis enim repellendus eligendi excepturi incidunt
 							odio. Quisquam laboriosam nesciunt placeat, magni optio autem ex
 							quo! Aperiam dicta id totam et adipisci. Error, aliquid quidem
 							modi quisquam corrupti dolorem a.
-						</p>
+						</p> */}
+						{/* <div
+							className={`w-[100px] h-[100px] bg-white`}
+							style={{ backgroundColor: color }}></div> */}
+						<div
+							className={`absolute rounded-full bg-white z-0`}
+							style={{
+								backgroundColor: color,
+								width: circleOptions.width,
+								height: circleOptions.height,
+							}}></div>
+						<div
+							className={`absolute rounded-full bg-black z-10`}
+							style={{
+								backgroundColor: 'black',
+								width: innerCircleOptions.width,
+								height: innerCircleOptions.height,
+							}}></div>
+						<div className=" absolute left-0 top-0  p-5">
+							<div className="flex gap-3 text-2xl font-semibold">
+								<h1>LumiOrb</h1>
+							</div>
+							<div className="flex gap-3">
+								Color:
+								<input
+									type="color"
+									onChange={handleColor}
+									value={color}
+									className="z-10"
+								/>
+							</div>
+							<div className="flex gap-3">
+								Size:
+								<input
+									type="range"
+									onChange={handleSize}
+									className="z-10"
+									value={circleOptions.height}
+									min="0"
+									max="1300"
+								/>
+							</div>
+							<div className="flex gap-3">
+								Size:
+								<input
+									type="range"
+									onChange={innerHandleSize}
+									className="z-10"
+									value={innerCircleOptions.height}
+									min="0"
+									max="1300"
+								/>
+							</div>
+						</div>
 					</div>
 				</section>
 			</main>
